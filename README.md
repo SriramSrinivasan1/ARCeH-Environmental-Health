@@ -19,7 +19,7 @@
 | 📄 [Practitioner's Brief](deliverables/ARCeH_Practitioners_Brief.pdf) | Environmental health practitioners | Should survey data shift money toward or away from clean-cooking programs? |
 | 📊 [Slide Deck](deliverables/ARCeH_Slide_Deck.pdf) | ARCeH Board | Which children's respiratory research should ARCeH back next? |
 | 📓 [Analysis Notebooks](notebooks/) | Data reviewers | How the data was cleaned, analyzed and stress-tested |
-| 🧭 [Process Documents](process/) | Hiring managers and mentors | How the dataset, research question and stress test were developed |
+| 🧭 [Process Documents](data/) | Hiring managers and mentors | How the dataset, research question and stress test were developed |
  
 ---
  
