@@ -1,5 +1,4 @@
-# ARCeH-Environmental-Health
-# 🌏 Household Air Pollution × Childhood Respiratory Infection — Southeast Asia
+# 🌏 Does Cooking Smoke Make Children Sick? Household Air Pollution in Southeast Asia
  
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
@@ -7,9 +6,9 @@
 ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge)
 ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)
  
-> A survey-weighted analysis of **44,650 children under five** across **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a widely held assumption: that cooking with polluting fuel drives childhood acute respiratory infection (ARI). Within each country, it does — until household wealth enters the model.
+> An analysis of **44,650 children under five** in **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a common belief: that children in homes cooking with wood, charcoal or kerosene get more chest infections. They do — but once family wealth is taken into account, the difference disappears.
 >
-> **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Advised by Dr. William Suk, ARCeH Board Member**
+> **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
  
 ![Practitioner chart](images/practitioner_chart_final.png)
  
@@ -17,138 +16,160 @@
  
 ## 🎯 The Problem
  
-Pneumonia remains a leading killer of children under five, and household smoke from wood, charcoal and kerosene is routinely named as a cause. In Cambodia, Myanmar and Timor-Leste, **more than 80% of children** live in homes that cook with polluting fuel.
+Pneumonia is one of the leading causes of death in children under five, and the World Health Organization links about half of those deaths to smoke from household cooking. In Cambodia, Myanmar and Timor-Leste, **more than 80% of children** live in homes that cook with wood, charcoal, kerosene or similar fuels.
  
-Environmental health practitioners have limited budgets for children's respiratory health. Before shifting money toward or away from clean-cooking programs, they need to know one thing:
+Health organizations have limited budgets. Before they invest in clean-cooking programs — or move money away from them — they need a clear answer to one question:
  
-> **Does cooking fuel reliably identify which children get sick?**
- 
-| The Assumption | What This Analysis Tested |
-|---|---|
-| Polluting fuel raises ARI risk | Whether the link holds across 5 countries in one harmonized model |
-| Fuel is the driver | Whether poverty explains the link instead |
-| Pooled regional data tells the story | Whether pooling hides what happens inside each country |
-| A null result means "no harm" | Whether the null survives a deliberate stress test |
+> **Does the type of cooking fuel tell us which children are more likely to get sick?**
  
 ---
  
 ## 🔬 The Investigation
  
-### 1. The pooled data showed nothing
+### 1. At first, fuel seemed to make no difference
  
-I built the dataset from **Demographic and Health Survey (DHS) microdata via IPUMS-DHS**: 47,600 children, each row linking a mother-reported symptom to the household's stove, kitchen and wealth. After decoding the codebook, filtering to usual-resident children and resolving missing values, **44,650 children** remained.
+I used **Demographic and Health Surveys (DHS)**, large national household surveys, accessed through IPUMS-DHS. Each record links one child to their mother's report of recent symptoms and to the household's cooking fuel, kitchen and living conditions. After cleaning the data, **44,650 children** remained, including **1,583 with chest infection symptoms** in the two weeks before the survey.
  
-The first comparison was flat:
+Across all five countries, the rates were almost identical:
  
-| Fuel Type | ARI Prevalence |
+| Cooking Fuel | Children With Chest Infection Symptoms |
 |---|---|
-| Clean fuel | 3.27% |
-| Polluting fuel | 3.28% |
+| Clean (gas, electricity) | 3.27% |
+| Polluting (wood, charcoal, kerosene) | 3.28% |
  
-Either the hypothesis was wrong, or the data was hiding something.
+Either the belief was wrong, or something in the data was hiding the pattern.
  
-### 2. Inside each country, the pattern appeared
+### 2. Looking inside each country revealed a link
  
-Split by country, biomass homes had more ARI in Indonesia (5.4% vs 4.0%), Myanmar (3.3% vs 2.6%) and the Philippines — where the rate **doubled** (1.6% vs 0.8%).
+When I looked at each country separately, children in wood- and charcoal-burning homes **did** get sick more often in 3 of the 5 countries. In the Philippines, the rate was **twice as high** (1.6% vs 0.8%).
  
-Indonesia was the reason the pooled number was flat. It was the largest sample, mostly clean-fuel, and high in ARI overall — enough to cancel the gaps everywhere else. That's **Simpson's paradox**, and it set the design rule for the rest of the project: compare children **within** the same country.
+So why did the combined numbers look flat? **Indonesia.** It was the largest group, most of its homes cook with clean fuel, and it has a high rate of chest infections overall. Mixing it with the other countries cancelled out the differences inside them.
  
-With country fixed effects, survey weights and clustered standard errors, the link was clear: **26% higher odds of ARI** in polluting-fuel homes (OR 1.26, p = 0.012).
+From then on, I compared children **only with other children in the same country**. On that basis, children in polluting-fuel homes were about **26% more likely** to have chest infection symptoms.
  
-### 3. Then wealth erased it
+### 3. Then family wealth made the link disappear
  
-I added covariates one group at a time to see what moved the estimate.
+Poorer families are more likely to cook with wood and charcoal. Their children also tend to get sick more often for other reasons, such as poorer nutrition, crowded homes and less access to healthcare. So I checked whether fuel still mattered when comparing **families of similar wealth**.
  
-| Model | Fuel Odds Ratio | Result |
-|---|---|---|
-| All countries pooled | 1.00 | ❌ No link |
-| Within country | **1.26** | ✅ Clear link |
-| + Household wealth | 0.92 | ❌ Link gone |
-| All covariates *except* wealth | 1.21 | ✅ Link holds |
-| **Full model** | **0.97** (95% CI 0.79–1.20) | ❌ **No detectable link** |
+I added one family factor at a time and watched how the result changed:
  
-Mother's education, smoking, kitchen location, breastfeeding and household size barely moved it. **Wealth alone switched the fuel effect on and off.** Poorer households cook with polluting fuel — and their children get sick more often for many other reasons.
- 
-Four independent methods confirmed it, including a Mantel-Haenszel cross-check, propensity score overlap weighting (RR 0.89) and a Cochran–Armitage trend test.
- 
-### 4. Stress-testing the null
- 
-A null result can be wrong too. I wrote a structured prompt asking AI to attack my interpretation — with two rules: **don't rewrite my work, and don't suggest ways to make the fuel effect significant.**
- 
-It found the weak point: **the DHS wealth index is partly built from cooking fuel itself.** Adjusting for wealth might erase a real smoke effect.
- 
-I tested it directly. Measuring family circumstances *without* the wealth index — mother's education and urban/rural residence — brought the fuel link back: **22% higher odds** (p = 0.038).
- 
-That changed the conclusion:
- 
-| Before Stress Test | After Stress Test |
+| What I Accounted For | Polluting-Fuel Homes vs Clean-Fuel Homes |
 |---|---|
-| "Rules out" more than a 20% increase | **Does not rule out** a modest effect |
-| Wealth overlap was a closing caveat | Wealth overlap is **the** main limitation |
-| Borderline results reported as findings | Labeled as **leads** — ~35 comparisons were run |
+| Nothing (all countries combined) | No difference |
+| Same country | ✅ **26% more likely** to be sick |
+| Same country + similar wealth | ❌ No difference |
+| Same country + every other family factor **except** wealth | ⚠️ 21% more likely (borderline) |
+| **Same country + all family factors** | ❌ **No difference** |
+ 
+Mother's education, smoking at home, breastfeeding and household size barely changed the result. **Wealth was the only factor that made the link disappear.** I re-ran the analysis with three other methods, and all of them reached the same answer.
+ 
+### 4. Testing my own conclusion
+ 
+A "no difference" result can be wrong too, so I tried to find holes in my own conclusion. I asked an AI to critique my interpretation, with two rules: **don't rewrite my work, and don't suggest ways to force a positive result.**
+ 
+The critique pushed me on an issue I had noted but underplayed. The survey's **wealth score is partly calculated from the type of cooking fuel a home uses.** So adjusting for wealth may quietly remove part of the very effect I was testing — like asking whether exercise helps fitness while scoring fitness partly by minutes of exercise.
+ 
+To test this, I measured family background **without** the wealth score, using the mother's education, city or rural home and the child's birth order instead. The link came back: children in polluting-fuel homes were about **22% more likely** to be sick.
+ 
+That changed how I described the result:
+ 
+| My First Conclusion | My Final Conclusion |
+|---|---|
+| Cooking fuel has no meaningful effect | A **small effect can't be ruled out** |
+| The wealth score issue was a footnote | It is the **main limitation** of the study |
+| Borderline results reported as findings | Treated as **leads to confirm**, since I ran many comparisons |
  
 ---
  
 ## 📊 Key Findings
  
-| Finding | Evidence | Verdict |
-|---|---|---|
-| Pooled data hides the fuel link | 3.27% vs 3.28% pooled; gaps within 3 countries | ⚠️ Simpson's paradox |
-| Fuel predicts ARI within countries | OR 1.26, p = 0.012 | ✅ Before wealth |
-| Fuel predicts ARI after full adjustment | OR 0.97, p = 0.81 | ❌ Not detectable |
-| Wealth is the strongest household predictor | Richest fifth OR 0.55 (half the odds) | ✅ Steady gradient |
-| A modest fuel effect is ruled out | Fuel-free adjustment: OR 1.22, p = 0.038 | ❌ Can't be ruled out |
-| Cooking indoors without a separate kitchen | OR 1.28, p = 0.023 | 🔍 Lead to confirm |
+| Finding | What It Means |
+|---|---|
+| ⚠️ Combining all five countries hid the pattern | Regional averages can be misleading; compare within each country |
+| ✅ Within each country, polluting fuel was linked to **26% more** chest infections | The common belief holds — at first |
+| ❌ After accounting for wealth, the link **disappeared** | Poverty explains most of the difference |
+| ✅ Children in the wealthiest fifth of homes were **about half as likely** to be sick as the poorest fifth | Wealth was the strongest household factor |
+| ⚠️ Measured without the wealth score, fuel was linked to **22% more** infections | A small fuel effect is still possible |
+| 🔍 Cooking indoors without a separate kitchen was linked to **28% more** infections, whatever the fuel | A lead worth confirming |
+| ❌ No single country showed a clear fuel effect on its own | Each country had too few cases to tell |
  
-> **Note on the null:** Mother-reported symptoms and "main fuel" exposure both pull estimates toward no difference. This result means **no clear association** — not that cooking smoke is harmless.
+> **What "no difference" does and doesn't mean:** The survey records only a household's *main* fuel, not the stove, ventilation or how close a child sits to the fire, and symptoms are reported from mothers' memory. Both make real differences harder to detect. This result means **no clear link was found** — not that cooking smoke is harmless.
  
 ---
  
-## 💡 Recommendation & Impact
+## 💡 Recommendations
  
-The findings were delivered as a **practitioner's brief** and **slide deck** built around one decision: should DHS cooking-fuel data shift resources toward or away from clean-cooking programs?
+I delivered the findings in two formats, each built around a different decision.
  
-**Recommendation:** Maintain current allocations and commission a targeted re-analysis that rebuilds the wealth index **without cooking fuel**, adds child age and uses newer survey rounds — **no new data collection required.**
+**📄 Practitioner's Brief — for environmental health practitioners**
+*Should this survey data shift money toward or away from clean-cooking programs?*
  
-- If the fuel effect survives → the case for clean-cooking investment gets **stronger**
-- If it doesn't → household **poverty** becomes the more defensible target
-Until then, the data does not support cutting clean-cooking programs — or targeting children by fuel type or wealth alone.
+**Keep current funding in place** and commission a low-cost re-analysis that rebuilds the wealth score **without cooking fuel**, adds each child's exact age and uses newer survey data. **No new data collection is needed.**
  
+- If the fuel link holds up → the case for clean-cooking programs gets **stronger**
+- If it doesn't → **household poverty** is the better target
+Until then, the data does not support cutting clean-cooking programs, or choosing which children to help based on fuel type or wealth alone.
+ 
+**📊 Slide Deck — for ARCeH**
+*Which children's respiratory health research should ARCeH support next in Southeast Asia?*
+ 
+Back a **follow-up study** that separates household wealth from cooking fuel:
+ 
+- Fund an early-career researcher to lead it
+- Collect direct exposure data: kitchen setup, ventilation, stove type and child age
+- Connect researchers across the five countries
+- Present fuel-only survey results with caution
+---
+ 
+<details>
+<summary><b>🔧 Technical Details (for statisticians and data reviewers)</b></summary>
+<br>
+| Area | Approach |
+|---|---|
+| **Data** | IPUMS-DHS microdata: Cambodia 2014, Myanmar 2015, Timor-Leste 2016, Indonesia 2017, Philippines 2017 |
+| **Sample** | 47,600 children → 44,650 surviving, usual-resident children with complete data; 1,583 ARI cases |
+| **Outcome** | Standard DHS ARI indicator: cough + short, rapid chest-related breathing in the past 2 weeks |
+| **Exposure** | Polluting (wood, charcoal, biomass, kerosene) vs clean fuel, per WHO 2014 |
+| **Main model** | Survey-weighted logistic regression, country fixed effects, standard errors clustered on 4,710 survey clusters |
+| **Main result** | Fuel OR 1.26 (95% CI 1.05–1.50, p = 0.012) within country → OR 0.97 (0.79–1.20, p = 0.81) fully adjusted |
+| **Robustness** | Unweighted model (OR 1.00), propensity score overlap weighting (RR 0.89), adjusted Cochran–Armitage trend (p = 0.20), Mantel-Haenszel cross-check (OR 1.29), kerosene split, per-country models, fuel × country interaction (p = 0.23) |
+| **Wealth question** | Fuel-free adjustment (education + urban + birth-order proxy): OR 1.22 (1.01–1.48, p = 0.038) |
+| **Model fit** | AUC 0.67; well calibrated across risk deciles |
+| **Pattern noted** | Pooled vs within-country disagreement is Simpson's paradox, driven by Indonesia's sample size and fuel mix |
+ 
+</details>
 ---
  
 ## 🧰 Tech Stack
  
 | Category | Tools |
 |---|---|
-| **Data wrangling** | pandas, NumPy |
-| **Modeling** | statsmodels — survey-weighted logistic regression, cluster-robust SEs, Wald tests |
-| **Robustness** | Propensity score weighting, cluster bootstrap, Mantel-Haenszel, Cochran–Armitage |
+| **Data cleaning** | pandas, NumPy |
+| **Statistical modeling** | statsmodels |
+| **Robustness checks** | Propensity score weighting, bootstrapping, trend tests |
 | **Visualization** | Matplotlib, Seaborn |
-| **Runtime** | Google Colab |
+| **Environment** | Google Colab |
  
 ---
  
 ## ⚠️ Limitations
  
-1. **Wealth vs fuel overlap** — the wealth index partly contains cooking fuel
-2. **No exact child age** in the extract — birth order used as a proxy
-3. **Cross-sectional, self-reported** — association, not causation
-4. **Limited overlap** — 47% of children have a near-certain fuel type, so the poorest rural homes have no clean-fuel comparison
+1. **Wealth and fuel overlap** — the survey's wealth score is partly built from cooking fuel, so the two are hard to separate
+2. **Fuel isn't the same as smoke exposure** — the survey doesn't record stove type, ventilation or time near the fire
+3. **No exact child age** — younger children get sick more often; birth order was used as a stand-in
+4. **One-time, self-reported survey** — shows links, not cause and effect, and relies on mothers' memory
+5. **Few poor clean-fuel homes** — in most countries, nearly all of the poorest families cook with polluting fuel, so there's little to compare against
 ---
  
 ## 📁 Repository Structure
  
 ```
 ├── notebooks/
-│   ├── Exploratory_Data_Analysis.ipynb   # Cleaning, feature engineering, weighted EDA
-│   └── Statistical_Analysis.ipynb        # Regression, sensitivity checks, charts
+│   ├── Exploratory_Data_Analysis.ipynb   # Data cleaning and first look at the patterns
+│   └── Statistical_Analysis.ipynb        # Main analysis, checks and charts
 ├── reports/
 │   ├── Practitioners_Brief.pdf
 │   └── Slide_Deck.pdf
 ├── images/
 └── README.md
 ```
- 
-*Data: DHS Program via IPUMS-DHS (University of Minnesota). Raw data is not redistributed — request the extract at [idhsdata.org](https://www.idhsdata.org).*
- 
----
