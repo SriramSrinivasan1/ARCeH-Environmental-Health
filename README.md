@@ -10,7 +10,16 @@
 >
 > **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
  
-![Practitioner chart](images/practitioner_chart_final.png)
+---
+ 
+## 📦 Final Deliverables
+ 
+| Deliverable | Audience | What It Answers |
+|---|---|---|
+| 📄 [Practitioner's Brief](deliverables/ARCeH_Practitioners_Brief.pdf) | Environmental health practitioners | Should survey data shift money toward or away from clean-cooking programs? |
+| 📊 [Slide Deck](deliverables/ARCeH_Slide_Deck.pdf) | ARCeH Board | Which children's respiratory research should ARCeH back next? |
+| 📓 [Analysis Notebooks](notebooks/) | Data reviewers | How the data was cleaned, analyzed and stress-tested |
+| 🧭 [Process Documents](process/) | Hiring managers and mentors | How the dataset, research question and stress test were developed |
  
 ---
  
@@ -123,7 +132,6 @@ Back a **follow-up study** that separates household wealth from cooking fuel:
  
 <details>
 <summary><b>🔧 Technical Details (for statisticians and data reviewers)</b></summary>
-<br>
 | Area | Approach |
 |---|---|
 | **Data** | IPUMS-DHS microdata: Cambodia 2014, Myanmar 2015, Timor-Leste 2016, Indonesia 2017, Philippines 2017 |
@@ -164,12 +172,21 @@ Back a **follow-up study** that separates household wealth from cooking fuel:
 ## 📁 Repository Structure
  
 ```
-├── notebooks/
-│   ├── Exploratory_Data_Analysis.ipynb   # Data cleaning and first look at the patterns
-│   └── Statistical_Analysis.ipynb        # Main analysis, checks and charts
-├── reports/
-│   ├── Practitioners_Brief.pdf
-│   └── Slide_Deck.pdf
-├── images/
-└── README.md
+ARCeH-Environmental-Health/
+├── README.md
+├── requirements.txt
+├── deliverables/                          # Final outputs (open these first)
+│   ├── ARCeH_Practitioners_Brief.pdf
+│   └── ARCeH_Slide_Deck.pdf
+├── notebooks/                             # Code, run in order
+│   ├── 01_Exploratory_Data_Analysis.ipynb
+│   ├── 02_Statistical_Analysis.ipynb
+├── data/
+│   ├── README.md                          # Which IPUMS-DHS samples and variables to request
+│   └── Codebook_Key_Variables.csv
+└── images/
+    └── practitioner_chart_final.png
 ```
+ 
+*Developed during the ARCeH Environmental Health Research Externship (Extern, 2026) by [Sriram Srinivasan](https://www.linkedin.com/in/sriram-srinivasan00/).*
+ 
