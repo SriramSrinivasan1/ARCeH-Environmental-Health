@@ -7,6 +7,7 @@
 ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)
  
 > An analysis of **44,650 children under five** in **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a common belief: that children in homes cooking with wood, charcoal or kerosene get more chest infections. They do, but once family wealth is taken into account, the difference disappears.
+> **Bottom line:** Don't use cooking fuel alone to decide which children to target as in this data, it was really tracking poverty.
 >
 > **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
  
@@ -113,39 +114,13 @@ I delivered the findings in two formats, each built around a different decision.
 **📄 Practitioner's Brief — for environmental health practitioners**
 *Should this survey data shift money toward or away from clean-cooking programs?*
  
-**Keep current funding in place** and commission a low-cost re-analysis that rebuilds the wealth score **without cooking fuel**, adds each child's exact age and uses newer survey data. **No new data collection is needed.**
+**Keep current funding in place** and conduct a low-cost re-analysis that rebuilds the wealth score **without cooking fuel**, adds each child's exact age and uses newer survey data. **No new data collection is needed.**
  
 - If the fuel link holds up → the case for clean-cooking programs gets **stronger**
 - If it doesn't → **household poverty** is the better target
-Until then, the data does not support cutting clean-cooking programs, or choosing which children to help based on fuel type or wealth alone.
- 
-**📊 Slide Deck — for ARCeH**
-*Which children's respiratory health research should ARCeH support next in Southeast Asia?*
- 
-Back a **follow-up study** that separates household wealth from cooking fuel:
- 
-- Fund an early-career researcher to lead it
-- Collect direct exposure data: kitchen setup, ventilation, stove type and child age
-- Connect researchers across the five countries
-- Present fuel-only survey results with caution
----
- 
-<details>
-<summary><b>🔧 Technical Details (for statisticians and data reviewers)</b></summary>
-| Area | Approach |
-|---|---|
-| **Data** | IPUMS-DHS microdata: Cambodia 2014, Myanmar 2015, Timor-Leste 2016, Indonesia 2017, Philippines 2017 |
-| **Sample** | 47,600 children → 44,650 surviving, usual-resident children with complete data; 1,583 ARI cases |
-| **Outcome** | Standard DHS ARI indicator: cough + short, rapid chest-related breathing in the past 2 weeks |
-| **Exposure** | Polluting (wood, charcoal, biomass, kerosene) vs clean fuel, per WHO 2014 |
-| **Main model** | Survey-weighted logistic regression, country fixed effects, standard errors clustered on 4,710 survey clusters |
-| **Main result** | Fuel OR 1.26 (95% CI 1.05–1.50, p = 0.012) within country → OR 0.97 (0.79–1.20, p = 0.81) fully adjusted |
-| **Robustness** | Unweighted model (OR 1.00), propensity score overlap weighting (RR 0.89), adjusted Cochran–Armitage trend (p = 0.20), Mantel-Haenszel cross-check (OR 1.29), kerosene split, per-country models, fuel × country interaction (p = 0.23) |
-| **Wealth question** | Fuel-free adjustment (education + urban + birth-order proxy): OR 1.22 (1.01–1.48, p = 0.038) |
-| **Model fit** | AUC 0.67; well calibrated across risk deciles |
-| **Pattern noted** | Pooled vs within-country disagreement is Simpson's paradox, driven by Indonesia's sample size and fuel mix |
- 
-</details>
+
+My overall recommendation was clear: **don't use cooking fuel alone to decide which children to target**, because in this data it was really tracking poverty. **Keep clean-cooking funding where it is, and run a quick re-analysis to settle the fuel question before moving any money.*
+
 ---
  
 ## 🧰 Tech Stack
@@ -187,6 +162,3 @@ ARCeH-Environmental-Health/
 └── images/
     └── practitioner_chart_final.png
 ```
- 
-*Developed during the ARCeH Environmental Health Research Externship (Extern, 2026) by [Sriram Srinivasan](https://www.linkedin.com/in/sriram-srinivasan00/).*
- 
