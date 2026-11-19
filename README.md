@@ -6,7 +6,7 @@
 ![Seaborn](https://img.shields.io/badge/Seaborn-4C72B0?style=for-the-badge)
 ![Google Colab](https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)
  
-> An analysis of **44,650 children under five** in **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a common belief: that children in homes cooking with wood, charcoal or kerosene get more chest infections. They do — but once family wealth is taken into account, the difference disappears.
+> An analysis of **44,650 children under five** in **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a common belief: that children in homes cooking with wood, charcoal or kerosene get more chest infections. They do, but once family wealth is taken into account, the difference disappears.
 >
 > **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
  
@@ -27,7 +27,7 @@
  
 Pneumonia is one of the leading causes of death in children under five, and the World Health Organization links about half of those deaths to smoke from household cooking. In Cambodia, Myanmar and Timor-Leste, **more than 80% of children** live in homes that cook with wood, charcoal, kerosene or similar fuels.
  
-Health organizations have limited budgets. Before they invest in clean-cooking programs — or move money away from them — they need a clear answer to one question:
+Health organizations have limited budgets. Before they invest in clean-cooking programs or move money away from them, they need a clear answer to one question:
  
 > **Does the type of cooking fuel tell us which children are more likely to get sick?**
  
@@ -74,9 +74,9 @@ Mother's education, smoking at home, breastfeeding and household size barely cha
  
 ### 4. Testing my own conclusion
  
-A "no difference" result can be wrong too, so I tried to find holes in my own conclusion. I asked an AI to critique my interpretation, with two rules: **don't rewrite my work, and don't suggest ways to force a positive result.**
+A "no difference" result can be wrong too, so I tried to find holes in my own conclusion. I asked AI to critique my interpretation, with two rules: **don't rewrite my work, and don't suggest ways to force a positive result.**
  
-The critique pushed me on an issue I had noted but underplayed. The survey's **wealth score is partly calculated from the type of cooking fuel a home uses.** So adjusting for wealth may quietly remove part of the very effect I was testing — like asking whether exercise helps fitness while scoring fitness partly by minutes of exercise.
+The critique pushed me on an issue I had noted but underplayed. The survey's **wealth score is partly calculated from the type of cooking fuel a home uses.** So adjusting for wealth may quietly remove part of the very effect I was testing, like asking whether exercise helps fitness while scoring fitness partly by minutes of exercise.
  
 To test this, I measured family background **without** the wealth score, using the mother's education, city or rural home and the child's birth order instead. The link came back: children in polluting-fuel homes were about **22% more likely** to be sick.
  
