@@ -9,7 +9,9 @@
 > An analysis of **44,650 children under five** in **Cambodia, Indonesia, Myanmar, the Philippines and Timor-Leste**, testing a common belief: that children in homes cooking with wood, charcoal or kerosene get more chest infections. They do, but once family wealth is taken into account, the difference disappears.
 > **Bottom line:** Don't use cooking fuel alone to decide which children to target as in this data, it was really tracking poverty.
 >
-> **Built for ARCeH (Advancing Research for Children's Health – Environmental Health) via Extern · Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
+> **Built for ARCeH (Advancing Research for Children's Health – Environmental Health)· Mentored by Dr. Bill Suk and Will Suk, ARCeH Board**
+
+🎥 **[Watch the 5-minute demo](https://www.loom.com/share/466d43652b3a4f3b98f1953516a890df)**
  
 ---
  
